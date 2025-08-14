@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vista formulario para el reporte -->
+    <record id="view_bank_report_form" model="ir.ui.view">
+        <field name="name">bank.custom.report.form</field>
+        <field name="model">bank.custom.report</field>
+        <field name="arch" type="xml">
+            <form string="Reporte de líneas pendientes">
+                <header>
+                    <button name="generate_excel_report" string="Exportar" type="object" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="journal_id"/>
+                        </group>
+                        <group>
+                            <label for="date_start"/>
+                            <div class="o_row" name="date">
+                                <field name="date_start" class="o_hr_narrow_field"/>
+                                <span>
+                                <label for="date_end"> </label>
+                                <field name="date_end" class="o_hr_narrow_field"/>
+                                </span>
+                            </div>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Resultados">
+                            <div invisible="order_list">
+                                <div class="alert alert-info">
+                                    <i class="fa fa-info-circle"/> No se encontraron líneas pendientes con los filtros actuales
+                                </div>
+                            </div>
+                            <field name="order_list" nolabel="1" readonly="1" >
+                                <tree default_order="date asc" limit="300">
+                                    <field name="name"/>
+                                    <field name="date"/>
+                                    <field name="is_grouped" column_invisible="1"/>
+                                    <field name="move_id" invisible="is_grouped" widget="many2one"/>
+                                    <button 
+                                        name="action_view_moves"
+                                        type="object"
+                                        string="Ver movimientos"
+                                        help="Ver todos los asientos con referencia"
+                                        invisible="not is_grouped"
+                                        icon="fa-list"/>
+                                    <field name="debit"/>
+                                    <field name="credit"/>
+                                    <field name="balance"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Acción de ventana -->
+    <record id="action_custom_bank_report" model="ir.actions.act_window">
+        <field name="name">Reporte de bancos</field>
+        <field name="res_model">bank.custom.report</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="view_id" ref="view_bank_report_form"/>
+    </record>
+
+    <!-- Menú -->
+    <menuitem id="menu_custom_report" 
+              name="Reporte bancos" 
+              action="action_custom_bank_report" 
+              parent="account.account_reports_legal_statements_menu"
+              sequence="1"/>
+</odoo>

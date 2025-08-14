@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <!-- Herencia en modo 'extension': modifica el template original in-place -->
+    <t t-name="custom_bank_report.button_report" t-inherit="account_accountant.BankRecGlobalInfo" 
+       t-inherit-mode="extension">
+        <!-- XPath que apunta al div principal -->
+        <xpath expr="//div[@t-if='props.journalId']" position="inside">
+            <!-- Botón adicional, alineado al final -->
+            <button class="btn btn-sm btn-outline-primary ms-2 align-self-center"
+                    t-on-click="() => this.actionOpenCustomReport()">
+                Reporte
+            </button>
+        </xpath>
+
+    </t>
+
+</templates>
