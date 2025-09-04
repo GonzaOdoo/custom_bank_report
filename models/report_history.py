@@ -102,6 +102,7 @@ class PendingPurchases(models.TransientModel):
                         'moves': self.env['account.move'],
                         'sequence': sequence,
                         'ref': ref,
+                        'name': line.name or ref,
                         'min_date': line.date,
                     }
                 grouped_data[key]['debit'] += line.debit
@@ -120,7 +121,7 @@ class PendingPurchases(models.TransientModel):
                 move_id = False if is_grouped else data['moves'][:1].id
     
                 new_line = Line.create({
-                    'name': data['ref'] if is_grouped else (data['moves'][:1].name or "Sin nombre"),
+                    'name': data['ref'] if is_grouped else data['name'],
                     'date': data['min_date'],
                     'debit': data['debit'],
                     'credit': data['credit'],
