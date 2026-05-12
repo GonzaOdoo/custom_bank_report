@@ -34,7 +34,7 @@
                                 </div>
                             </div>
                             <field name="order_list" nolabel="1" readonly="1" >
-                                <tree default_order="date asc" limit="300">
+                                <list default_order="date asc" limit="300">
                                     <field name="name"/>
                                     <field name="date"/>
                                     <field name="is_grouped" column_invisible="1"/>
@@ -49,7 +49,7 @@
                                     <field name="debit"/>
                                     <field name="credit"/>
                                     <field name="balance"/>
-                                </tree>
+                                </list>
                             </field>
                         </page>
                     </notebook>
