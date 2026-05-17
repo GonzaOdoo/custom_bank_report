@@ -287,7 +287,7 @@ class CustomReportLine(models.Model):
                 'type': 'ir.actions.act_window',
                 'name': f'Movimientos con referencia: {self.ref}',
                 'res_model': 'account.move',
-                'view_mode': 'tree,form',
+                'view_mode': 'list,form',
                 'domain': [('id', 'in', moves.ids)],
                 'context': {'create': False, 'edit': False},
                 'target': 'current',
