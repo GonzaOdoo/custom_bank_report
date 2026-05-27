@@ -22,11 +22,11 @@
 
     # any module necessary for this one to work correctly
     'depends': ['account_accountant'],
-    'assets': {
-        'web.assets_backend': [
-            'custom_bank_report/static/src/*',
-        ],
-    },
+    #'assets': {
+    #    'web.assets_backend': [
+    #        'custom_bank_report/static/src/*',
+    #    ],
+    #},
     # always loaded
     "data": ["security/ir.model.access.csv",
              "views/report_views.xml",
